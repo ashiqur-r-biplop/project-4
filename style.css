@@ -6,7 +6,7 @@
     font-family: 'Work Sans', sans-serif;
 }
 /* header  */
-.header-btn{
+.btn-dom{
     background: #EB5757;
     border-radius: 16px;
     border: none;
@@ -15,3 +15,19 @@
     font-weight: 500;
 }
 /* header  end*/
+
+/* icon style */
+i{
+    font-size: 15px !important;
+    cursor: pointer;
+    color: #EB5757;
+    background-color: #eb57574b;
+    padding: 12px;
+    border-radius: 50%;
+}
+/* icon style end */
+
+/* card style  */
+img{
+    height: 250px !important;
+}
