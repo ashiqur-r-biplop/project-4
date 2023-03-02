@@ -1,12 +1,21 @@
-@media screen and (min-width: 1400px) {
+/* control modal width */
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+    .modal-dialog-centered{
+        max-width: 70% !important;
+    }
+}
+/* 1201 after modal width media apply */
+@media screen and (min-width: 1201px) {
     .modal-dialog-centered{
         max-width: 50% !important;
     }
-    
 }
-@media screen and  (min-width: 532px) and (max-width: 1399px) {
-    .modal-dialog-centered{
-        max-width: 90% !important;
+/* 333px before modal button media apply */
+@media screen and (max-width: 333px) {
+    .button-group-flex{
+        flex-direction: column;
     }
-    
+    .button-group{
+        margin-top: 10px;
+    }
 }
