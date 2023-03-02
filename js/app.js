@@ -23,7 +23,7 @@ const displayData = (arrayOfData, dataLimit) =>{
     arrayOfData.forEach( singleData => {
         console.log(singleData)
         // access single data
-        const {image, features, name, published_in} = singleData
+        const {image, features, name, published_in , id} = singleData;
         // destructuring in object
         const div = document.createElement('div');
         // apply card to dynamic
@@ -40,18 +40,50 @@ const displayData = (arrayOfData, dataLimit) =>{
               <div class="d-flex justify-content-between align-items-center">
                 <div>
                     <h4>${name}</h4>
-                    <p>${published_in}</p>
+                    
+                    <p><i class="fa-solid fa-calendar"></i> ${published_in}</p>
                 </div>
-                <i class="fa-solid fa-arrow-right"></i>
+                <i class="fa-solid fa-arrow-right" onclick="loadModal('${id}')"></i>
               </div>
-
-              
             </div>
           </div>
         `
         cardContainer.appendChild(div)
     });
+    // spinner
+    toggleSpinner(false)
 }
+// modal start
+const loadModal =async (id) =>{
+    // console.log(id)
+    const URL = `https://openapi.programming-hero.com/api/ai/tool/${id}`
+    try{
+        const res = await fetch(URL)
+        const data =  await res.json()
+        displayModal(data.data)
+    }
+    catch{
+        return;
+    }
+}
+const displayModal = (singleData) =>{
+    console.log(singleData)
+}
+
+// spinner
+const toggleSpinner =(isSpinner) =>{
+    const spinner =  document.getElementById('spinner')
+    if(isSpinner === true){
+        spinner.classList.remove('d-none')
+    }
+    else{
+        spinner.classList.add('d-none')
+    }
+
+}
+
+
+
 
 
 
@@ -59,7 +91,10 @@ const displayData = (arrayOfData, dataLimit) =>{
 // sellAll Btn
 document.getElementById('SeeAll-Btn').addEventListener('click', function(){
     loadData()
+    toggleSpinner(true);
 })
 
+// spinner 
+toggleSpinner(true);
 // load data
 loadData(6)
