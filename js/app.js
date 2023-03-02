@@ -73,7 +73,7 @@ const displayModal = (singleData) =>{
     // modalBody.style.width = '200px';
     modalBody.innerHTML = `
     <div class="col">
-        <div class="card p-3 ">
+        <div class="card p-3 left-card">
             <h6>${singleData.description}</h6>
             <div class="d-flex">
                 <div class="text-center">
