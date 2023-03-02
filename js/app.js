@@ -75,7 +75,7 @@ const displayModal = (singleData) =>{
     <div class="col">
         <div class="card p-3 left-card">
             <h6>${singleData.description}</h6>
-            <div class="d-flex justify-content-center align-items-center w-100">
+            <div class="d-flex justify-content-between align-items-center w-100">
                 <div class="text-center button-group">
                 <p class="m-0">${singleData.pricing[0].price}</p>
                 <p class="m-0">${singleData.pricing[0].plan}</p>

@@ -1,0 +1,13 @@
+@media screen and (min-width: 1400px) {
+    .modal-dialog-centered{
+        max-width: 50% !important;
+        border: 1px solid red;
+    }
+    
+}
+@media screen and  (min-width: 532px) and (max-width: 1399px) {
+    .modal-dialog-centered{
+        max-width: 90% !important;
+    }
+    
+}
