@@ -21,10 +21,11 @@ const displayData = (arrayOfData, dataLimit) =>{
     }
 
     arrayOfData.forEach( singleData => {
-        // console.log(singleData)
+        console.log(singleData)
         // access single data
         const {image, features, name, published_in , id} = singleData;
         // destructuring in object
+        // console.log(features)
         const div = document.createElement('div');
         // apply card to dynamic
         div.classList.add('col');
@@ -33,9 +34,13 @@ const displayData = (arrayOfData, dataLimit) =>{
             <img src="${image}" class="img-fluid card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">Features</h5>
-              <p class="card-text m-0">2.${features[1]}</p>
-              <p class="card-text m-0">3.${features[2]}</p>
-              <p class="card-text m-0">1.${features[0]}</p>
+              <ol typeof= "1">
+              ${features[0] ?  `<li>${features[0]}</li>`  : ''}
+              ${features[1] ?  `<li>${features[1]}</li>`  : ''}
+              ${features[2] ?  `<li>${features[2]}</li>`  : ''}
+              ${features[3] ?  `<li>${features[3]}</li>`  : ''}
+              </ol>
+              
               <hr class="my-3">
               <div class="d-flex justify-content-between align-items-center">
                 <div>
@@ -68,7 +73,7 @@ const loadModal =async (id) =>{
 }
 // display modal 
 const displayModal = (singleData) =>{
-    console.log(singleData.pricing[2].plan)
+    console.log(singleData.pricing[2].price.slice(0,10))
     const modalBody = document.getElementById('modal-body');
     // modalBody.style.width = '200px';
     modalBody.innerHTML = `
@@ -77,16 +82,16 @@ const displayModal = (singleData) =>{
             <h6>${singleData.description}</h6>
             <div class="d-flex justify-content-between align-items-center w-100">
                 <div class="text-center button-group text-success fw-bold modal-amount-btn">
-                <p class="m-0">${singleData.pricing[0].price >= 0 ? singleData.pricing[0].price : 'Free of Cost/Basic' }</p>
-                <p class="m-0">${singleData.pricing[0].plan === 'Basic' ? singleData.pricing[0].plan : 'Free of Cost/Basic' }</p>
+                <p class="m-0">${singleData.pricing[0].price.slice(4, 9) == 'month' ? singleData.pricing[0].price : 'Free of Cost/Basic' }</p>
+                <p class="m-0">${singleData.pricing ? singleData.pricing[0].plan : '' }</p>
                 </div>
                 <div class="text-center button-group text-warning-emphasis fw-bold modal-amount-btn">
-                <p class="m-0">${singleData.pricing[1].price > 0 ? singleData.pricing[1].price : 'Free of Cost/Basic' }</p>
-                <p class="m-0">${singleData.pricing[1].plan === 'Professional' ? singleData.pricing[1].plan  : 'Free of Cost/Basic' }</p>
+                <p class="m-0">${singleData.pricing[1].price.includes('month') == true ? singleData.pricing[1].price : 'Free of Cost/Professional' }</p>
+                <p class="m-0">${singleData.pricing ? singleData.pricing[1].plan  : '' }</p>
                 </div>
                 <div class="text-center button-group text-danger fw-bold modal-amount-btn">
-                <p class="m-0">${singleData.pricing[2].price > 0 ? singleData.pricing[2].price : 'Free of Cost/Basic' }</p>
-                <p class="m-0">"${singleData.pricing[2].plan === 'Enterprise' ? singleData.pricing[2].plan  : 'Free of Cost/Basic' }"</p>
+                <p class="m-0">${singleData.pricing[2].price  ? singleData.pricing[2].price.slice(0,10) : '' }</p>
+                <p class="m-0">"${singleData.pricing  ? singleData.pricing[2].plan  : 'Free of Cost/Enterprise' }"</p>
                 </div>
             </div>
         </div>
