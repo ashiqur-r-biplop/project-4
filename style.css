@@ -50,7 +50,7 @@ img{
 /* modal stye */
 .left-card{
     background-color: #eb575758;
-    border: 2px solid #EB5757;
+    border: 2px solid #eb5757;
 }
 .button-group{
     background-color: #fff;
@@ -59,4 +59,7 @@ img{
     border-radius: 10px;
 }
 
-
+.modal-amount-btn{
+    cursor: pointer;
+    font-size: 10px;
+}

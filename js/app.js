@@ -76,17 +76,17 @@ const displayModal = (singleData) =>{
         <div class="card p-3 left-card">
             <h6>${singleData.description}</h6>
             <div class="d-flex justify-content-between align-items-center w-100">
-                <div class="text-center button-group">
+                <div class="text-center button-group text-success fw-bold modal-amount-btn">
                 <p class="m-0">${singleData.pricing[0].price}</p>
                 <p class="m-0">${singleData.pricing[0].plan}</p>
                 </div>
-                <div class="text-center button-group">
-                <p class="m-0">${singleData.pricing[0].price}</p>
-                <p class="m-0">${singleData.pricing[0].plan}</p>
+                <div class="text-center button-group text-warning-emphasis fw-bold modal-amount-btn">
+                <p class="m-0">${singleData.pricing[1].price}</p>
+                <p class="m-0">${singleData.pricing[1].plan}</p>
                 </div>
-                <div class="text-center button-group">
-                <p class="m-0">${singleData.pricing[0].price}</p>
-                <p class="m-0">${singleData.pricing[0].plan}</p>
+                <div class="text-center button-group text-danger fw-bold modal-amount-btn">
+                <p class="m-0">${singleData.pricing[2].price}</p>
+                <p class="m-0">${singleData.pricing[2].plan}</p>
                 </div>
             </div>
         </div>
