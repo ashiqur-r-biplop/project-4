@@ -21,7 +21,7 @@ const displayData = (arrayOfData, dataLimit) =>{
     }
 
     arrayOfData.forEach( singleData => {
-        console.log(singleData)
+        // console.log(singleData)
         // access single data
         const {image, features, name, published_in , id} = singleData;
         // destructuring in object
@@ -43,7 +43,7 @@ const displayData = (arrayOfData, dataLimit) =>{
                     
                     <p><i class="fa-solid fa-calendar"></i> ${published_in}</p>
                 </div>
-                <i class="fa-solid fa-arrow-right" onclick="loadModal('${id}')"></i>
+                <i class="fa-solid fa-arrow-right" onclick="loadModal('${id}')" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i>
               </div>
             </div>
           </div>
@@ -66,8 +66,32 @@ const loadModal =async (id) =>{
         return;
     }
 }
+// display modal 
 const displayModal = (singleData) =>{
-    console.log(singleData)
+    console.log(singleData.pricing)
+    const modalBody = document.getElementById('modal-body');
+    // modalBody.style.width = '200px';
+    modalBody.innerHTML = `
+    <div class="col">
+        <div class="card p-3 ">
+            <h6>${singleData.description}</h6>
+            <div class="d-flex">
+                <div class="text-center">
+                <p class="m-0">${singleData.pricing[0].price}</p>
+                <p class="m-0">${singleData.pricing[0].plan}</p>
+                </div>
+            </div>
+        </div>
+   </div>
+   <div class="col">
+        <div class="card p-3 text-center">
+        <img src ="${singleData.image_link[0]}" class="img-fluid">
+        <h6>${singleData.input_output_examples ? singleData.input_output_examples[0].input : 'No! Not Yet! Take a break!!!'}</h6>
+        <p>${singleData.input_output_examples ? singleData.input_output_examples[0].output : 'No! Not Yet! Take a break!!!'}</p>
+        </div>
+   </div>
+        
+    `
 }
 
 // spinner
@@ -81,12 +105,6 @@ const toggleSpinner =(isSpinner) =>{
     }
 
 }
-
-
-
-
-
-
 
 // sellAll Btn
 document.getElementById('SeeAll-Btn').addEventListener('click', function(){
