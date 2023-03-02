@@ -68,7 +68,7 @@ const loadModal =async (id) =>{
 }
 // display modal 
 const displayModal = (singleData) =>{
-    console.log(singleData.pricing)
+    console.log(singleData.pricing[2].plan)
     const modalBody = document.getElementById('modal-body');
     // modalBody.style.width = '200px';
     modalBody.innerHTML = `
@@ -77,16 +77,16 @@ const displayModal = (singleData) =>{
             <h6>${singleData.description}</h6>
             <div class="d-flex justify-content-between align-items-center w-100">
                 <div class="text-center button-group text-success fw-bold modal-amount-btn">
-                <p class="m-0">${singleData.pricing[0].price}</p>
-                <p class="m-0">${singleData.pricing[0].plan}</p>
+                <p class="m-0">${singleData.pricing[0].price >= 0 ? singleData.pricing[0].price : 'Free of Cost/Basic' }</p>
+                <p class="m-0">${singleData.pricing[0].plan === 'Basic' ? singleData.pricing[0].plan : 'Free of Cost/Basic' }</p>
                 </div>
                 <div class="text-center button-group text-warning-emphasis fw-bold modal-amount-btn">
-                <p class="m-0">${singleData.pricing[1].price}</p>
-                <p class="m-0">${singleData.pricing[1].plan}</p>
+                <p class="m-0">${singleData.pricing[1].price > 0 ? singleData.pricing[1].price : 'Free of Cost/Basic' }</p>
+                <p class="m-0">${singleData.pricing[1].plan === 'Professional' ? singleData.pricing[1].plan  : 'Free of Cost/Basic' }</p>
                 </div>
                 <div class="text-center button-group text-danger fw-bold modal-amount-btn">
-                <p class="m-0">${singleData.pricing[2].price}</p>
-                <p class="m-0">${singleData.pricing[2].plan}</p>
+                <p class="m-0">${singleData.pricing[2].price > 0 ? singleData.pricing[2].price : 'Free of Cost/Basic' }</p>
+                <p class="m-0">"${singleData.pricing[2].plan === 'Enterprise' ? singleData.pricing[2].plan  : 'Free of Cost/Basic' }"</p>
                 </div>
             </div>
         </div>

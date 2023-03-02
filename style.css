@@ -37,6 +37,7 @@ img{
 }
 #close-icon{
     background-color: #EB5757;
+    --bs-btn-close-opacity: 1;
     padding: 10px;
     border-radius: 50%;
 }
