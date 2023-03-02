@@ -5,3 +5,13 @@
     box-sizing: border-box;
     font-family: 'Work Sans', sans-serif;
 }
+/* header  */
+.header-btn{
+    background: #EB5757;
+    border-radius: 16px;
+    border: none;
+    padding: 10px 20px;
+    color: #fff;
+    font-weight: 500;
+}
+/* header  end*/
