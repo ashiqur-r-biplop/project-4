@@ -52,3 +52,15 @@ img{
     background-color: #eb575758;
     border: 2px solid #EB5757;
 }
+.button-group{
+    background-color: #fff;
+    color: black;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.modal-dialog-centered{
+    max-width: 50% !important;
+    border: 1px solid red;
+}
+
