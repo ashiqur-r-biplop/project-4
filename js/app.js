@@ -19,7 +19,6 @@ const displayData = (arrayOfData, dataLimit) =>{
     else{
         SeeAllBtn.classList.add('d-none');
     }
-
     arrayOfData.forEach( singleData => {
         // console.log(singleData)
         // access single data
@@ -59,61 +58,57 @@ const displayData = (arrayOfData, dataLimit) =>{
     toggleSpinner(false);
 }
 // modal start
-const loadModal =async (id) =>{
+const loadModal = async (id) =>{
     // console.log(id)
     const URL = `https://openapi.programming-hero.com/api/ai/tool/${id}`
-    try{
         const res = await fetch(URL)
         const data =  await res.json()
         displayModal(data.data)
-    }
-    catch{
-        return;
-    }
+
 }
 // display modal 
 const displayModal = (singleData) =>{
-    console.log(singleData.integrations[0])
     const modalBody = document.getElementById('modal-body');
     modalBody.innerHTML = `
-    <div class="col mt-2">
-        <div class="card p-3 left-card">
+    <div class="col  mt-2">
+        <div class="card p-3 modal-col left-card">
             <h6>${singleData.description}</h6>
             <div class="button-group-flex d-flex justify-content-between align-items-center w-100">
                 <div class="text-center button-group text-success fw-bold modal-amount-btn">
-                    <p class="m-0">${singleData.pricing[0].price.slice(4, 9) == 'month' ? singleData.pricing[0].price : 'Free of Cost/Basic' }</p>
-                    <p class="m-0">${singleData.pricing ? singleData.pricing[0].plan : '' }</p>
+                ${(singleData.pricing !== null && singleData.pricing[0].price.includes('month')) ? `<p class="m-0">${singleData.pricing[0].price}</p>` : 'Free of Cost/'}
+                ${(singleData.pricing !== null && typeof singleData.pricing[0].plan === 'string') ? `<p class="m-0">${singleData.pricing[0].plan}</p>` : `Basic`}
                 </div>
                 <div class="text-center button-group text-warning-emphasis fw-bold modal-amount-btn">
-                    <p class="m-0">${singleData.pricing[1].price.includes('month') == true ? singleData.pricing[1].price : 'Free of Cost/Professional' }</p>
-                    <p class="m-0">${singleData.pricing ? singleData.pricing[1].plan  : '' }</p>
+                ${(singleData.pricing !== null && singleData.pricing[1].price.includes('month')) ? `<p class="m-0">${singleData.pricing[1].price}</p>` : 'Free of Cost/'}
+                ${(singleData.pricing !== null && typeof singleData.pricing[1].plan === 'string') ? `<p class="m-0">${singleData.pricing[1].plan}</p>` : `Pro`}
                 </div>
                 <div class="text-center button-group text-danger fw-bold modal-amount-btn">
-                    <p class="m-0">${singleData.pricing[2].price  ? singleData.pricing[2].price.slice(0,10) : '' }</p>
-                    <p class="m-0">"${singleData.pricing  ? singleData.pricing[2].plan  : 'Free of Cost/Enterprise' }"</p>
+                ${(singleData.pricing !== null &&  singleData.pricing[2]) ? `<p class="m-0">${singleData.pricing[2].price.slice(0,10)}</p>` : 'Free of Cost/'}
+                ${(singleData.pricing !== null &&  singleData.pricing[2].plan ) ? `<p class="m-0">${singleData.pricing[2].plan}</p>` : `Enterprise`}
                 </div>
             </div>
-            <div class="d-flex flex-lg-nowrap flex-wrap justify-content-between align-items-center w-100">
-                <div class="mt-4">
+            <div class="row  justify-content-between w-100 mx-auto">
+                <div class="mt-4 col-lg-6">
                     <h5>Features</h5>
-                    ${singleData.features[1] ?  `<li>${singleData.features[1].feature_name}</li>` : 'No! Not Yet! Take a break!!! '}
-                    ${singleData.features[2] ?  `<li>${singleData.features[2].feature_name}</li>` : 'No! Not Yet! Take a break!!! '}
-                    ${singleData.features[3] ?  `<li>${singleData.features[3].feature_name}</li>` : 'No! Not Yet! Take a break!!! '}
-                    ${singleData.features[4] ?  `<li>${singleData.features[4].feature_name}</li>` : 'No! Not Yet! Take a break!!! '}
+                 ${singleData.features[1].feature_name ? `<li>${singleData.features[1].feature_name}</li>` : '<p class="m-0">-No data Found</p>'}
+                 ${singleData.features[2].feature_name ? `<li>${singleData.features[2].feature_name}</li>` : '<p class="m-0">-No data Found</p>'}
+                 ${singleData.features[3].feature_name ? `<li>${singleData.features[3].feature_name}</li>` : '<p class="m-0">-No data Found</p>'}
                 </div>
-                <div class="mt-4">
+                <div class="mt-4 col-lg-6">
                     <h5>Integrations</h5>
-                    ${singleData.integrations[0] ?  `<li>${singleData.integrations[0]}</li>` : 'No! Not Yet! Take a break!!! '}
-                    ${singleData.integrations[1] ?  `<li>${singleData.integrations[1]}</li>` : 'No! Not Yet! Take a break!!! '}
-                    ${singleData.integrations[2] ?  `<li>${singleData.integrations[2]}</li>` : 'No! Not Yet! Take a break!!! '}
-                    ${singleData.integrations[3] ?  `<li>${singleData.integrations[3]}</li>` : 'No! Not Yet! Take a break!!! '}
+                    ${(singleData.integrations !== null && singleData.integrations[0]) ? `<li>${singleData.integrations[0]}</li>` : '<p class="m-0">-No data Found</p>'}
+                    ${singleData.integrations !== null && singleData.integrations[1] ? `<li>${singleData.integrations[1]}</li>` : '<p class="m-0">-No data Found</p>'}
+                    ${singleData.integrations !== null && singleData.integrations[2] ? `<li>${singleData.integrations[2]}</li>` : '<p class="m-0">-No data Found</p>'}
                 </div>
             </div>
         </div>
    </div>
    <div class="col mt-2">
-        <div class="card p-3 text-center">
-            <img src ="${singleData.image_link[0]}" class="img-fluid">
+        <div class="card p-3  modal-col text-center">
+            <div class="modal-image-box">
+                <img src ="${singleData.image_link[0]}" class="img-fluid">
+                ${(singleData.accuracy.score !== null ) ? `<button>${Math.floor(singleData.accuracy.score * 100)}% accuracy</button>` : ''}
+            </div>
             <h6>${singleData.input_output_examples ? singleData.input_output_examples[0].input : 'No! Not Yet! Take a break!!!'}</h6>
             <p> ${singleData.input_output_examples ? singleData.input_output_examples[0].output.slice(0,100) : 'No! Not Yet! Take a break!!!'}...</p>
         </div>
@@ -136,7 +131,6 @@ const toggleSpinner =(isSpinner) =>{
 // sellAll Btn
 document.getElementById('SeeAll-Btn').addEventListener('click', function(){
     loadData()
-    toggleSpinner(true);
 })
 
 // spinner 
