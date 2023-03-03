@@ -1,9 +1,12 @@
 // load data
+let obj ;
+let arr = [];
 const loadData = async (dataLimit) =>{
     const URL = `https://openapi.programming-hero.com/api/ai/tools`;
     const res = await fetch(URL)
     const data = await res.json()
     displayData(data.data.tools, dataLimit)
+    obj = data.data.tools;
 }
 // display data
 const displayData = (arrayOfData, dataLimit) =>{
@@ -20,6 +23,7 @@ const displayData = (arrayOfData, dataLimit) =>{
         SeeAllBtn.classList.add('d-none');
     }
     arrayOfData.forEach( singleData => {
+        // arr.push(singleData)
         // console.log(singleData)
         // access single data
         const {image, features, name, published_in , id} = singleData;
@@ -115,7 +119,11 @@ const displayModal = (singleData) =>{
    </div>
     `
 }
-
+// sortData 
+function sortByDate(data, dataLimit) {
+    data.sort((a, b) => new Date(a.published_in) - new Date(b.published_in));
+    displayData(data, dataLimit);
+}
 // spinner
 const toggleSpinner =(isSpinner) =>{
     const spinner =  document.getElementById('spinner')
@@ -127,7 +135,11 @@ const toggleSpinner =(isSpinner) =>{
     }
 
 }
-
+// sortBtn
+document.getElementById('sortBtn').addEventListener('click', function(){
+    toggleSpinner(true)
+    sortByDate(obj);
+})
 // sellAll Btn
 document.getElementById('SeeAll-Btn').addEventListener('click', function(){
     loadData()
@@ -137,3 +149,4 @@ document.getElementById('SeeAll-Btn').addEventListener('click', function(){
 toggleSpinner(true);
 // load data
 loadData(6)
+console.log(arr)
