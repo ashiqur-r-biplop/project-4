@@ -1,6 +1,5 @@
+let obj 
 // load data
-let obj ;
-let arr = [];
 const loadData = async (dataLimit) =>{
     const URL = `https://openapi.programming-hero.com/api/ai/tools`;
     const res = await fetch(URL)
@@ -23,12 +22,9 @@ const displayData = (arrayOfData, dataLimit) =>{
         SeeAllBtn.classList.add('d-none');
     }
     arrayOfData.forEach( singleData => {
-        // arr.push(singleData)
-        // console.log(singleData)
         // access single data
-        const {image, features, name, published_in , id} = singleData;
         // destructuring in object
-        // console.log(features)
+        const {image, features, name, published_in , id} = singleData;
         const div = document.createElement('div');
         // apply card to dynamic
         div.classList.add('col');
@@ -43,7 +39,6 @@ const displayData = (arrayOfData, dataLimit) =>{
               ${features[2] ?  `<li>${features[2]}</li>`  : ''}
               ${features[3] ?  `<li>${features[3]}</li>`  : ''}
               </ol>
-              
               <hr class="my-3">
               <div class="d-flex justify-content-between align-items-center">
                 <div>
@@ -54,7 +49,7 @@ const displayData = (arrayOfData, dataLimit) =>{
                 <i class="fa-solid fa-arrow-right" onclick="loadModal('${id}')" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i>
               </div>
             </div>
-          </div>
+        </div>
         `
         cardContainer.appendChild(div)
     });
@@ -68,7 +63,6 @@ const loadModal = async (id) =>{
         const res = await fetch(URL)
         const data =  await res.json()
         displayModal(data.data)
-
 }
 // display modal 
 const displayModal = (singleData) =>{
@@ -94,35 +88,37 @@ const displayModal = (singleData) =>{
             <div class="row  justify-content-between w-100 mx-auto">
                 <div class="mt-4 col-lg-6">
                     <h5>Features</h5>
-                 ${singleData.features[1].feature_name ? `<li>${singleData.features[1].feature_name}</li>` : '<p class="m-0">-No data Found</p>'}
-                 ${singleData.features[2].feature_name ? `<li>${singleData.features[2].feature_name}</li>` : '<p class="m-0">-No data Found</p>'}
+                 ${singleData.features[1].feature_name ? `<li>${singleData.features[1].feature_name}</li>` : ''}
+                 ${singleData.features[2].feature_name ? `<li>${singleData.features[2].feature_name}</li>` : ''}
                  ${singleData.features[3].feature_name ? `<li>${singleData.features[3].feature_name}</li>` : '<p class="m-0">-No data Found</p>'}
                 </div>
                 <div class="mt-4 col-lg-6">
                     <h5>Integrations</h5>
-                    ${(singleData.integrations !== null && singleData.integrations[0]) ? `<li>${singleData.integrations[0]}</li>` : '<p class="m-0">-No data Found</p>'}
-                    ${singleData.integrations !== null && singleData.integrations[1] ? `<li>${singleData.integrations[1]}</li>` : '<p class="m-0">-No data Found</p>'}
+                    ${(singleData.integrations !== null && singleData.integrations[0]) ? `<li>${singleData.integrations[0]}</li>` : ''}
+                    ${singleData.integrations !== null && singleData.integrations[1] ? `<li>${singleData.integrations[1]}</li>` : ''}
                     ${singleData.integrations !== null && singleData.integrations[2] ? `<li>${singleData.integrations[2]}</li>` : '<p class="m-0">-No data Found</p>'}
                 </div>
             </div>
         </div>
    </div>
    <div class="col mt-2">
-        <div class="card p-3  modal-col text-center">
+        <div class="card p-3  modal-col text-center ">
             <div class="modal-image-box">
                 <img src ="${singleData.image_link[0]}" class="img-fluid">
                 ${(singleData.accuracy.score !== null ) ? `<button>${Math.floor(singleData.accuracy.score * 100)}% accuracy</button>` : ''}
             </div>
-            <h6>${singleData.input_output_examples ? singleData.input_output_examples[0].input : 'No! Not Yet! Take a break!!!'}</h6>
-            <p> ${singleData.input_output_examples ? singleData.input_output_examples[0].output.slice(0,100) : 'No! Not Yet! Take a break!!!'}...</p>
+            <div class="mt-2">
+            <h6>${singleData.input_output_examples !== null ? singleData.input_output_examples[0].input : 'Can you give any example?'}</h6>
+            <p> ${singleData.input_output_examples !== null ? singleData.input_output_examples[0].output.slice(0,100) : 'No! Not Yet! Take a break!!!'}...</p>
+            </div>
         </div>
    </div>
     `
 }
 // sortData 
-function sortByDate(data, dataLimit) {
+function sortByDate(data) {
     data.sort((a, b) => new Date(a.published_in) - new Date(b.published_in));
-    displayData(data, dataLimit);
+    displayData(data);
 }
 // spinner
 const toggleSpinner =(isSpinner) =>{
@@ -133,7 +129,6 @@ const toggleSpinner =(isSpinner) =>{
     else{
         spinner.classList.add('d-none')
     }
-
 }
 // sortBtn
 document.getElementById('sortBtn').addEventListener('click', function(){
@@ -144,9 +139,7 @@ document.getElementById('sortBtn').addEventListener('click', function(){
 document.getElementById('SeeAll-Btn').addEventListener('click', function(){
     loadData()
 })
-
 // spinner 
 toggleSpinner(true);
 // load data
 loadData(6)
-console.log(arr)
